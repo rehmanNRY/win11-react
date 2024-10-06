@@ -85,11 +85,17 @@ export const taskbarSlice = createSlice({
     },
     toggleApp: (state, action) => {
       const { name } = action.payload;
-      state.taskbarApps = state.taskbarApps.map((app) =>
-        app.name === name
-          ? { ...app, isOpen: !app.isOpen }
-          : { ...app, isOpen: false })
+      state.taskbarApps = state.taskbarApps.map((app) => {
+        if (app.name === name) {
+          return { ...app, isOpen: !app.isOpen };
+        } else if (app.category === 'taskApp') {
+          return { ...app, isOpen: false };
+        } else {
+          return app; // Make sure to return the unchanged app if it doesn't meet any conditions
+        }
+      });
     }
+    
   },
 })
 

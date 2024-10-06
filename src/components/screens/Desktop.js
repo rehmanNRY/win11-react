@@ -11,6 +11,7 @@ import About from '../windows/About'
 import StartMenu from '../menu/StartMenu'
 import SearchMenu from '../menu/SearchMenu'
 import Calendar from '../menu/Calendar'
+import Settings from '../windows/Settings'
 
 const Desktop = () => {
   const { taskbarApps } = useSelector((state) => state.taskbar) || [{ name: '', vaue: '' }];
@@ -22,6 +23,7 @@ const Desktop = () => {
   const isCalOpen = taskbarApps.find(app => app.name === "calendar")?.isOpen;
   const isAboutOpen = taskbarApps.find(app => app.name === "about")?.isOpen;
   const isExpOpen = taskbarApps.find(app => app.name === "explorer")?.isOpen;
+  const isSettingsOpen = taskbarApps.find(app => app.name === "setting")?.isOpen;
 
   const [contextMenu, setContextMenu] = useState({
     isVisible: false,
@@ -65,6 +67,7 @@ const Desktop = () => {
         yPos={contextMenu.yPos}
         isVisible={contextMenu.isVisible}
       />
+      <Settings isSettingsOpen={isSettingsOpen}  />
       <About isAboutOpen={isAboutOpen} />
       <Notification isNotiOpen={isNotiOpen} />
       <Explorer isExpOpen={isExpOpen} />
